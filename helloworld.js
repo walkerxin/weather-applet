@@ -1,0 +1,2 @@
+// pages/helloworld.js
+Page({})
