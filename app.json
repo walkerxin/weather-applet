@@ -2,5 +2,8 @@
   "pages": [
     "pages/weather/weather"
   ],
+  "window": {
+    "navigationBarBackgroundColor": "#c4efff"
+  },
   "sitemapLocation": "sitemap.json"
 }

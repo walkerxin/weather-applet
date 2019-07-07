@@ -1,4 +1,4 @@
 <view class="weather-wrapper" style="background: center/contain url(img/sunny-bg.png)">
-  <view class="temperature">120°</view>
-  <view class="desc">晴天</view>
+  <view class="temperature">{{ temperature }}°</view>
+  <view class="desc">{{ desc }}</view>
 </view>
