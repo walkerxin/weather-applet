@@ -21,7 +21,8 @@ Page({
     temperature: '',
     desc: '',
     weatherBg: 'sunny-bg',
-    hourlyForcast: []
+    hourlyForcast: [],
+    today: {}
   },
   onLoad() {
     this.getWeather()
@@ -50,15 +51,41 @@ Page({
           frontColor: '#000000',
           backgroundColor: colorMap[result.now.weather],
         })
-
-        // 未来24h天气
-        result.forecast
-
+        
+        this.setHourlyWeather(result)
+        this.setTodayBar(result)
       },
       complete: () => {
         callback && callback()
       }
     })
 
+  },
+  setHourlyWeather(result) {
+    // 未来24h天气
+    let hourlyForcast = []
+    let current = new Date()
+    result.forecast && result.forecast.forEach(o => {
+      hourlyForcast.push({
+        temp: o.temp + '°C',
+        iconPath: 'img/' + o.weather + '-icon.png',
+        hour: (current.getHours() + o.id * 3) % 24 + ':00'
+      })
+    })
+
+    hourlyForcast[0] && (hourlyForcast[0].hour = '现在')
+    this.setData({
+      hourlyForcast: hourlyForcast
+    })
+
+  },
+  setTodayBar(result) {
+    let current = new Date()
+    this.setData({
+      today: {
+        text: `${current.getFullYear()}-${current.getMonth() + 1}-${current.getDate()} 今天`,
+        tempRange: result.today.minTemp + '°C~' + result.today.maxTemp + '°C'
+      }
+    })
   }
 })

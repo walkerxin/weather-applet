@@ -1,6 +1,12 @@
 <view class="weather-wrapper" style="background: center/contain url(img/{{weatherBg}}.png)">
   <view class="temperature">{{ temperature }}°</view>
   <view class="desc">{{ desc }}</view>
+  <view class="today-bar">
+    <view class="text">{{today.text}}</view>
+    <view class="text">{{today.tempRange}}
+      <image class="icon" src="img/arrow.png"></image>
+    </view>
+  </view>
 </view>
 
 <view class="time-wrapper">
@@ -10,6 +16,10 @@
 
 <scroll-view scroll-x>
   <view class="hourly-wrapper">
-    <view class="hourly-view" wx:for="{{hourlyForcast}}">{{item}}</view>
+    <view class="hourly-view" wx:for="{{hourlyForcast}}">
+      <view class="temp">{{item.temp}}</view>
+      <image class="icon" src="{{item.iconPath}}"></image>
+      <view class="hour">{{item.hour}}</view>
+    </view>
   </view>
 </scroll-view>

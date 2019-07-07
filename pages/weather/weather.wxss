@@ -16,6 +16,25 @@
 .weather-wrapper {
   width: 750rpx;
   padding: 200rpx 0 224rpx;
+  position: relative;
+}
+
+.today-bar {
+  position: absolute;
+  bottom: 0;
+  width: 690rpx;
+  line-height: 90rpx;
+  margin: 0 30rpx;
+  border-top: 1rpx solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between; /* 两端对齐 */
+  opacity: 0.8;
+}
+
+.today-bar .icon {
+  width: 13rpx;
+  height: 24rpx;
+  margin-left: 20rpx;
 }
 
 .time-wrapper {
@@ -43,7 +62,13 @@
 
 .hourly-wrapper .hourly-view {
   display: flex;
+  flex-direction: column;
   flex-shrink: 0;
-  width: 180rpx;
-  justify-content: center;
+  width: 140rpx;
+  align-items: center;
+}
+
+.hourly-view .icon {
+  width: 90rpx;
+  height: 90rpx;
 }
