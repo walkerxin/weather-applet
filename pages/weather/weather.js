@@ -18,9 +18,10 @@ const colorMap = {
 
 Page({
   data: {
-    temperature: '12',
-    desc: '晴天',
-    weatherBg: 'sunny-bg'
+    temperature: '',
+    desc: '',
+    weatherBg: 'sunny-bg',
+    hourlyForcast: []
   },
   onLoad() {
     this.getWeather()
@@ -49,6 +50,9 @@ Page({
           frontColor: '#000000',
           backgroundColor: colorMap[result.now.weather],
         })
+
+        // 未来24h天气
+        result.forecast
 
       },
       complete: () => {

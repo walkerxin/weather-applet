@@ -17,3 +17,33 @@
   width: 750rpx;
   padding: 200rpx 0 224rpx;
 }
+
+.time-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40rpx;
+}
+
+.time-wrapper .time-icon {
+  width: 36rpx;
+  height: 28rpx;
+  margin-right: 15rpx;
+}
+
+.time-wrapper .time-text {
+  font-size: 30rpx;
+  line-height: 42rpx;
+  opacity: 0.5;
+}
+
+.hourly-wrapper {
+  display: flex;
+}
+
+.hourly-wrapper .hourly-view {
+  display: flex;
+  flex-shrink: 0;
+  width: 180rpx;
+  justify-content: center;
+}

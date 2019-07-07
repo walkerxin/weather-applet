@@ -2,3 +2,14 @@
   <view class="temperature">{{ temperature }}°</view>
   <view class="desc">{{ desc }}</view>
 </view>
+
+<view class="time-wrapper">
+  <image class="time-icon" src="img/time-icon.png"></image>
+  <view class="time-text">未来 24 小时预报</view>
+</view>
+
+<scroll-view scroll-x>
+  <view class="hourly-wrapper">
+    <view class="hourly-view" wx:for="{{hourlyForcast}}">{{item}}</view>
+  </view>
+</scroll-view>
