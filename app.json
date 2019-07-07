@@ -3,7 +3,8 @@
     "pages/weather/weather"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#c4efff"
+    "navigationBarBackgroundColor": "#fff",
+    "enablePullDownRefresh": true
   },
   "sitemapLocation": "sitemap.json"
 }
