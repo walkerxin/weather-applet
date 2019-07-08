@@ -1,7 +1,18 @@
 <view class="weather-wrapper">
+
   <image class="weather-bg" src="img/{{weatherBg}}.png"></image>
+
+  <view class="location-wrapper">
+    <view class="location">
+      <image class="loc-icon" src="img/location-icon.png"></image>
+      <view class="loc-text">深圳市</view>
+    </view>
+    <view class="loc-tip">点击获取当前位置</view>
+  </view>
+  
   <view class="temperature">{{ temperature }}°</view>
   <view class="desc">{{ desc }}</view>
+
   <view class="today-bar" bindtap="listDaylyForecast">
     <view class="text">{{today.text}}</view>
     <view class="text">{{today.tempRange}}

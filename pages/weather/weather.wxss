@@ -19,12 +19,37 @@
   position: fixed;
   top: 0;
   left: 0;
+  z-index: -1;
 }
 
 .weather-wrapper {
   width: 750rpx;
-  padding: 200rpx 0 224rpx;
+  padding: 56rpx 0 224rpx;
   position: relative;
+}
+
+.location-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 30rpx;
+  margin-bottom: 60rpx;
+}
+
+.location-wrapper .location {
+  display: flex;
+  align-items: center;
+}
+
+.location-wrapper .location .loc-icon {
+  width: 21rpx;
+  height: 30rpx;
+  margin-right: 15rpx;
+}
+
+.location-wrapper .location .loc-text,
+.location-wrapper .loc-tip {
+  line-height: 42rpx;
 }
 
 .today-bar {
