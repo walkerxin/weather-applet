@@ -2,10 +2,10 @@
 
   <image class="weather-bg" src="img/{{weatherBg}}.png"></image>
 
-  <view class="location-wrapper">
+  <view class="location-wrapper" bindtap="getCurrentLocation">
     <view class="location">
       <image class="loc-icon" src="img/location-icon.png"></image>
-      <view class="loc-text">深圳市</view>
+      <view class="loc-text">{{currentCity}}</view>
     </view>
     <view class="loc-tip">点击获取当前位置</view>
   </view>

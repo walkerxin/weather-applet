@@ -16,15 +16,25 @@ const colorMap = {
   'snow': '#99e3ff'
 }
 
+let QQMapWX = require('../../libs/qqmap-wx-jssdk.js'); // 引入腾讯位置服务SDK核心类
+
 Page({
   data: {
     temperature: '',
     desc: '',
     weatherBg: 'sunny-bg',
     hourlyForcast: [],
-    today: {}
+    today: {},
+    qqmapsdk: null,
+    currentCity: ''
   },
   onLoad() {
+    // 实例化API核心类
+    this.setData({
+      qqmapsdk: new QQMapWX({
+        key: 'WM6BZ-MQCCJ-CUPFL-FTY4D-62VMK-TSB5H'
+      })
+    })
     this.getWeather()
   },
   onPullDownRefresh() {
@@ -32,12 +42,35 @@ Page({
       wx.stopPullDownRefresh()
     })
   },
+  getCurrentLocation() {
+
+    wx.getLocation({
+      success: rs => {
+
+        this.data.qqmapsdk.reverseGeocoder({
+          //位置坐标，默认获取当前位置，非必须参数
+          location: {
+            longitude: rs.longitude,
+            latitude: rs.latitude
+          },
+          success: rs => {
+            this.setData({
+              currentCity: rs.result.address_component.city
+            })
+            this.getWeather()
+          }
+        })
+
+      }
+    })
+
+  },
   getWeather(callback) {
     
     wx.request({
       url: 'https://test-miniprogram.com/api/weather/now',
       data: {
-        city: '深圳'
+        city: this.data.currentCity
       },
       success: rs => {
 
