@@ -51,7 +51,7 @@ Page({
           frontColor: '#000000',
           backgroundColor: colorMap[result.now.weather],
         })
-        
+
         this.setHourlyWeather(result)
         this.setTodayBar(result)
       },
@@ -86,6 +86,11 @@ Page({
         text: `${current.getFullYear()}-${current.getMonth() + 1}-${current.getDate()} 今天`,
         tempRange: result.today.minTemp + '°C~' + result.today.maxTemp + '°C'
       }
+    })
+  },
+  listDaylyForecast() {
+    wx.navigateTo({
+      url: '/pages/list/list'
     })
   }
 })

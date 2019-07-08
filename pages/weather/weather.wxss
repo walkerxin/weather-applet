@@ -13,6 +13,14 @@
   opacity: 0.65;
 }
 
+.weather-bg {
+  width: 750rpx;
+  height: 760rpx;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 .weather-wrapper {
   width: 750rpx;
   padding: 200rpx 0 224rpx;
@@ -25,7 +33,7 @@
   width: 690rpx;
   line-height: 90rpx;
   margin: 0 30rpx;
-  border-top: 1rpx solid rgba(0, 0, 0, 0.1);
+  border-top: 1rpx solid rgba(0, 0, 0, 0.04);
   display: flex;
   justify-content: space-between; /* 两端对齐 */
   opacity: 0.8;
@@ -64,11 +72,18 @@
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  width: 140rpx;
+  width: 128rpx;
   align-items: center;
 }
 
 .hourly-view .icon {
   width: 90rpx;
   height: 90rpx;
+}
+
+/* scroll-view 滚动条隐藏 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
 }

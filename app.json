@@ -1,8 +1,10 @@
 {
   "pages": [
-    "pages/weather/weather"
+    "pages/weather/weather",
+    "pages/list/list"
   ],
   "window": {
+    "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#fff",
     "enablePullDownRefresh": true
   },

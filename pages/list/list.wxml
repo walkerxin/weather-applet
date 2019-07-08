@@ -1,0 +1,9 @@
+<!--pages/list/list.wxml-->
+<view class="dayly-weather" wx:for="{{daylyForecast}}">
+  <view class="text-group">
+    <view class="week">{{item.weekText}}</view>
+    <view class="date">{{item.dateText}}</view>
+  </view>
+  <view class="temp-range">{{item.tempRange}}</view>
+  <image class="temp-icon" src="../weather/img/{{item.weather}}-icon.png"></image>
+</view>

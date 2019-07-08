@@ -1,7 +1,8 @@
-<view class="weather-wrapper" style="background: center/contain url(img/{{weatherBg}}.png)">
+<view class="weather-wrapper">
+  <image class="weather-bg" src="img/{{weatherBg}}.png"></image>
   <view class="temperature">{{ temperature }}°</view>
   <view class="desc">{{ desc }}</view>
-  <view class="today-bar">
+  <view class="today-bar" bindtap="listDaylyForecast">
     <view class="text">{{today.text}}</view>
     <view class="text">{{today.tempRange}}
       <image class="icon" src="img/arrow.png"></image>
