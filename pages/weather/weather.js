@@ -25,16 +25,14 @@ Page({
     weatherBg: 'sunny-bg',
     hourlyForcast: [],
     today: {},
-    qqmapsdk: null,
-    currentCity: ''
+    locationTip: '点击获取当前位置',
+    currentCity: '新加坡'
   },
   onLoad() {
     // 实例化API核心类
-    this.setData({
-      qqmapsdk: new QQMapWX({
+    this.qqmapsdk = new QQMapWX({
         key: 'WM6BZ-MQCCJ-CUPFL-FTY4D-62VMK-TSB5H'
-      })
-    })
+    })    
     this.getWeather()
   },
   onPullDownRefresh() {
@@ -47,7 +45,7 @@ Page({
     wx.getLocation({
       success: rs => {
 
-        this.data.qqmapsdk.reverseGeocoder({
+        this.qqmapsdk.reverseGeocoder({
           //位置坐标，默认获取当前位置，非必须参数
           location: {
             longitude: rs.longitude,
@@ -67,7 +65,7 @@ Page({
   },
   getWeather(callback) {
     
-    wx.request({
+    this.data.currentCity && wx.request({
       url: 'https://test-miniprogram.com/api/weather/now',
       data: {
         city: this.data.currentCity
@@ -76,7 +74,7 @@ Page({
 
         let result = rs.data.result
         this.setData({
-          temperature: result.now.temp,
+          temperature: result.now.temp + '°',
           desc: weatherMap[result.now.weather],
           weatherBg: result.now.weather + '-bg'
         })
@@ -123,7 +121,7 @@ Page({
   },
   listDaylyForecast() {
     wx.navigateTo({
-      url: '/pages/list/list'
+      url: '/pages/list/list?city=' + this.data.currentCity
     })
   }
 })

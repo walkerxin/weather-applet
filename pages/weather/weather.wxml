@@ -7,10 +7,10 @@
       <image class="loc-icon" src="img/location-icon.png"></image>
       <view class="loc-text">{{currentCity}}</view>
     </view>
-    <view class="loc-tip">点击获取当前位置</view>
+    <view class="loc-tip">{{ locationTip }}</view>
   </view>
   
-  <view class="temperature">{{ temperature }}°</view>
+  <view class="temperature">{{ temperature }}</view>
   <view class="desc">{{ desc }}</view>
 
   <view class="today-bar" bindtap="listDaylyForecast">

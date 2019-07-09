@@ -50,6 +50,7 @@
 .location-wrapper .location .loc-text,
 .location-wrapper .loc-tip {
   line-height: 42rpx;
+  min-height: 42rpx;
 }
 
 .today-bar {

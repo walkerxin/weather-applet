@@ -2,9 +2,12 @@ const weekArr = ['星期日', '星期一', '星期二', '星期三', '星期四'
 
 Page({
   data: {
-    daylyForecast: []
+    daylyForecast: [],
+    city: ''
   },
   onLoad: function (options) {
+    console.log(options)
+    this.setData({ city: options.city })
     this.getWeather()
   },
   onPullDownRefresh: function () {
@@ -14,17 +17,16 @@ Page({
   },
   getWeather(callback) {
 
-    wx.request({
+    this.data.city && wx.request({
       url: 'https://test-miniprogram.com/api/weather/future',
       data: {
-        city: '深圳',
+        city: this.data.city,
         time: new Date()
       },
       success: rs => {
         let result = rs.data.result
         let daylyForecast = []
         result && result.forEach(o => {
-          console.log(o.id, o.weather, o.minTemp, o.maxTemp)
           let forecastDay = new Date(new Date().getTime() + o.id * 86400000)
           daylyForecast.push({
             weekText: weekArr[forecastDay.getDay()],
