@@ -16,6 +16,12 @@ const colorMap = {
   'snow': '#99e3ff'
 }
 
+const locTipTextObj = {
+  authorized: '',
+  unAuthorized: '点击开启位置权限',
+  unPrompted: '点击获取当前位置'
+}
+
 let QQMapWX = require('../../libs/qqmap-wx-jssdk.js'); // 引入腾讯位置服务SDK核心类
 
 Page({
@@ -25,26 +31,56 @@ Page({
     weatherBg: 'sunny-bg',
     hourlyForcast: [],
     today: {},
-    locationTip: '点击获取当前位置',
+    locationTipText: locTipTextObj['unPrompted'],
     currentCity: '新加坡'
   },
+  // 生命周期函数--监听页面加载
   onLoad() {
     // 实例化API核心类
     this.qqmapsdk = new QQMapWX({
         key: 'WM6BZ-MQCCJ-CUPFL-FTY4D-62VMK-TSB5H'
     })    
-    this.getWeather()
+    this.gainUserLocSetting(undefined, () => {
+      this.getWeather()
+    })
   },
   onPullDownRefresh() {
     this.getWeather(() => {
       wx.stopPullDownRefresh()
     })
   },
+  onTapLocation() {
+    this.gainUserLocSetting(true)
+  },
+  gainUserLocSetting(isBtnTap, noTapAndUnAuthFn) {
+    wx.getSetting({
+      success: rs => {
+
+        let locAuth = rs.authSetting['scope.userLocation']
+        let locAuthTip = locAuth ? 'authorized' : 'unPrompted'
+        if (locAuth === false) {
+          locAuthTip = 'unAuthorized'
+          isBtnTap && wx.openSetting({
+            success: rs => {
+              rs.authSetting['scope.userLocation'] && this.getCurrentLocation()
+            }
+          })
+        } else {
+          (locAuth || isBtnTap) ? this.getCurrentLocation() : (noTapAndUnAuthFn && noTapAndUnAuthFn())
+        }
+
+        this.setData({
+          locationTipText: locTipTextObj[locAuthTip]
+        })
+
+      }
+    })
+  },
   getCurrentLocation() {
 
     wx.getLocation({
+      // type: 'gcj02', 默认值
       success: rs => {
-
         this.qqmapsdk.reverseGeocoder({
           //位置坐标，默认获取当前位置，非必须参数
           location: {
@@ -53,12 +89,18 @@ Page({
           },
           success: rs => {
             this.setData({
-              currentCity: rs.result.address_component.city
+              currentCity: rs.result.address_component.city,
+              locationTipText: locTipTextObj['authorized']
             })
             this.getWeather()
           }
         })
 
+      },
+      fail: () => {
+        this.setData({
+          locationTipText: locTipTextObj['unAuthorized']
+        })
       }
     })
 

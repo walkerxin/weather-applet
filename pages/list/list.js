@@ -6,7 +6,6 @@ Page({
     city: ''
   },
   onLoad: function (options) {
-    console.log(options)
     this.setData({ city: options.city })
     this.getWeather()
   },
